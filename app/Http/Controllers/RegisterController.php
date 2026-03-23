@@ -7,8 +7,40 @@ use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
+/**
+ * @OA\Tag(
+ *     name="Authentication",
+ *     description="Вход и регистрация"
+ * )
+ */
 class RegisterController extends Controller
 {
+    /**
+     * @OA\Post(
+     *     path="/register",
+     *     summary="Регистрация нового пользователя",
+     *     tags={"Authentication"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"name", "email", "password"},
+     *             @OA\Property(property="name", type="string", example="Иван"),
+     *             @OA\Property(property="surname", type="string", example="Иванов"),
+     *             @OA\Property(property="patronymic", type="string", example="Иванович"),
+     *             @OA\Property(property="email", type="string", format="email", example="user@example.com"),
+     *             @OA\Property(property="password", type="string", format="password", example="secret123")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=302,
+     *         description="Перенаправление на список задач"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Ошибка валидации"
+     *     )
+     * )
+     */
     public function save(RegisterRequest $request)
     {
         if (Auth::check()) {
