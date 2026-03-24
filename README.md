@@ -1,4 +1,4 @@
-# Task Manager
+# TaskMaster
 
 ## Описание предметной области
 
