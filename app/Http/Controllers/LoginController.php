@@ -49,4 +49,32 @@ class LoginController extends Controller
             'auth' => 'Не удалось авторизоваться'
         ]);
     }
+
+    /**
+     * @OA\Post(
+     *     path="/logout",
+     *     summary="Выход пользователя из системы",
+     *     tags={"Authentication"},
+     *     @OA\Response(
+     *         response=302,
+     *         description="Перенаправление на страницу входа"
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Не авторизован"
+     *     )
+     * )
+     */
+    public function logout(Request $request)
+    {
+        if (!Auth::check()) {
+            return redirect(route('login'));
+        }
+
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect(route('login'));
+    }
 }

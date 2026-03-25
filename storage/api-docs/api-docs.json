@@ -55,6 +55,23 @@
                 }
             }
         },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Выход пользователя из системы",
+                "operationId": "7f261a1e14b78ceb6cadbe969582a855",
+                "responses": {
+                    "302": {
+                        "description": "Перенаправление на страницу входа"
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    }
+                }
+            }
+        },
         "/register": {
             "post": {
                 "tags": [
